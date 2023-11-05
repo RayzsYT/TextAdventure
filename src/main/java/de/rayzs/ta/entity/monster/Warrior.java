@@ -4,8 +4,8 @@ import de.rayzs.ta.entity.EntityMonster;
 
 public class Warrior extends EntityMonster {
 
-    public Warrior(int health, int level, int damage) {
-        super("Warrior", health, level, damage);
+    public Warrior(int health, int level) {
+        super("Warrior", health, level);
         a(1, 4, "kick")
                 .a(4, 10, "sword slice")
                 .a(2, 6, "head nut")

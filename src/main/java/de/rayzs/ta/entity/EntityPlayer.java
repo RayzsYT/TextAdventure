@@ -28,6 +28,14 @@ public class EntityPlayer extends EntityAttack implements Entity {
         return crystals;
     }
 
+    public int getAttackBoost() {
+        return attackBoost;
+    }
+
+    public int getDefensive() {
+        return defensive;
+    }
+
     @Override
     public String name() {
         return name;
@@ -40,8 +48,10 @@ public class EntityPlayer extends EntityAttack implements Entity {
 
     @Override
     public int receiveDamage(int damage) {
-        int reduce = defensive != 0 ? (damage / 100) * defensive : 0;
-        return damage - reduce;
+        int reduce = defensive != 0 ? (damage / 100) * defensive : 0,
+                finalDamage = damage - reduce;
+        health -= finalDamage;
+        return finalDamage;
     }
 
     @Override
@@ -51,7 +61,7 @@ public class EntityPlayer extends EntityAttack implements Entity {
     }
 
     @Override
-    public void onDie() {
+    public void die() {
         try {
             Console.i("You died! Game will close in 5 seconds.");
             Thread.sleep(5000);

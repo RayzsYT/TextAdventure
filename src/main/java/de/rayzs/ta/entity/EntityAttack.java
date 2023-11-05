@@ -15,7 +15,7 @@ public class EntityAttack {
     }
 
     public void attack(Entity attacker, Entity victim) {
-        attacks.get(MathUtils.RANDOM.nextInt(attacks.size())).handleDamage(attacker, victim);
+        attacks.get(MathUtils.RANDOM.nextInt(attacks.size() - 1)).handleDamage(attacker, victim);
     }
 
     public class Attack {
@@ -29,13 +29,26 @@ public class EntityAttack {
             this.attackName = attackName.toUpperCase();
         }
 
+        public String getAttackName() {
+            return attackName;
+        }
+
+        public int getMinDamage() {
+            return minDamage;
+        }
+
+        public int getMaxDamage() {
+            return maxDamage;
+        }
+
         public void handleDamage(Entity attacker, Entity victim) {
             int damage = MathUtils.nextInt(minDamage, maxDamage);
             attacker.dealDamage(damage);
             victim.receiveDamage(damage);
             int remainingHealth = victim instanceof EntityPlayer ? ((EntityPlayer) victim).getHealth() : ((EntityMonster) victim).getHealth();
-            Console.i("%s attacked %s with %s (-%s)! %s has %shp left.",
-                    attacker.name(), victim.name(), attackName, victim.name(), String.valueOf(remainingHealth));
+            Console.i("%s attacked %s with %s (-%s)!" + (remainingHealth > 0 ? " %s has %shp left." : ""),
+                    attacker.name(), victim.name(), attackName, String.valueOf(damage), victim.name(), String.valueOf(remainingHealth));
+            if(remainingHealth < 1) victim.die();
         }
     }
 }

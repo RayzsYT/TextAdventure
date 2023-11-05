@@ -4,14 +4,13 @@ import de.rayzs.ta.console.Console;
 
 public class EntityMonster extends EntityAttack implements Entity {
 
-    private int health, level, damage;
+    private int health, level;
     private String name;
 
-    public EntityMonster(String name, int health, int level, int damage) {
+    public EntityMonster(String name, int health, int level) {
         this.name = name;
         this.health = health;
         this.level = level;
-        this.damage = damage;
     }
 
     public int getLevel() {
@@ -39,11 +38,12 @@ public class EntityMonster extends EntityAttack implements Entity {
 
     @Override
     public int receiveDamage(int damage) {
+        health -= damage;
         return damage;
     }
 
     @Override
-    public void onDie() {
+    public void die() {
         Console.i("%s died!", name);
     }
 }

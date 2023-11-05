@@ -5,5 +5,5 @@ public interface Entity {
     EntityType type();
     int receiveDamage(int damage);
     int dealDamage(int damage);
-    void onDie();
+    void die();
 }
