@@ -1,2 +1,2 @@
 # TextAdventure
-A small text based RPG game I'm currently on for fun.  
+This small project is a game that I'm trying to create.
